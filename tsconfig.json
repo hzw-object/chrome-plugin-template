@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "outDir": "./",
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
@@ -18,10 +17,13 @@
     "noUnusedParameters": true,
     "experimentalDecorators": true,
     "lib": ["dom", "esnext"],
+    "types": ["element-plus/global"],
+    "typeRoots": ["./node_modules/@types/", "./types"],
     "noImplicitAny": false,
     "skipLibCheck": true,
     "paths": {
       "@/*": ["src/*"],
+      "#/*": ["types/*"]
     }
   },
   "include": [
@@ -33,6 +35,7 @@
     "types/**/*.ts",
     "config/**/*.ts",
     "config/**/*.d.ts",
+    "vite.config.ts"
   ],
-  "exclude": ["node_modules", "dist", "**/*.js" ]
+  "exclude": ["node_modules", "tests/server/**/*.ts", "dist", "**/*.js" ]
 }

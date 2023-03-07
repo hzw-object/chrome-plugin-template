@@ -15,22 +15,13 @@
     "service_worker": "background.js"
   },
   "permissions": ["bookmarks", "storage", "activeTab", "tabs", "scripting","cookies"],
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["js/popup.js","background.js"],
-      "all_frames": true
-    }
-  ],
-  "web_accessible_resources": [
-    {
-      "resources": ["images/*.png"],
-      "matches": ["<all_urls>"]
-    }
-  ],
-  "default_locale": "zh_CN",
-  "chrome_url_overrides": {
-    "newtab": "popup.html"
-    
+  "host_permissions": ["https://*.openai.com/"],
+   "action": {
+    "default_popup": "popup.html",
+    "newtab":"tabs.html"
+  },
+   "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
   }
 }

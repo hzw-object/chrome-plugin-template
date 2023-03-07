@@ -6,7 +6,10 @@
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
     "cSpell.words": [
+      "chatgpt",
+      "davinci",
       "unplugin",
+      "webextension",
       "webpackbar"
     ]
   }
