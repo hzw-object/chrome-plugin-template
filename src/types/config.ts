@@ -6,7 +6,7 @@ export enum ProviderType {
 export interface ProviderConfigs {
   provider: ProviderType;
   configs: {
-    [ProviderType.GPT3]: GPT3ProviderConfig | undefined;
+    [ProviderType.GPT3]: GPT3ProviderConfig;
   };
 }
 export interface GPT3ProviderConfig {

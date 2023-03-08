@@ -14,13 +14,15 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["bookmarks", "storage", "activeTab", "tabs", "scripting","cookies"],
+  "permissions": ["bookmarks", "storage", "activeTab", "tabs", "scripting", "cookies"],
   "host_permissions": ["https://*.openai.com/"],
-   "action": {
-    "default_popup": "popup.html",
-    "newtab":"tabs.html"
+  "action": {
+    "default_popup": "popup.html"
   },
-   "options_ui": {
+  "chrome_url_overrides": {
+    "newtab": "tabs.html"
+  },
+  "options_ui": {
     "page": "options.html",
     "open_in_tab": true
   }

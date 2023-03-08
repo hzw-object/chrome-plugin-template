@@ -33,7 +33,7 @@ module.exports = [
     plugins: [
       AutoImportPlugin({
         imports: ['vue'],
-        resolvers: [ElementPlusResolver()],
+        resolvers: [ElementPlusResolver({ importStyle: 'sass' })],
         dts: './src/types/auto-imports.d.ts',
       }),
       Components({
@@ -68,25 +68,23 @@ module.exports = [
         include: [/\.vue$/, /\.vue\?vue/],
         exclude: [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
       }),
-      new HtmlWebpackPlugin(
-        {
-          template: './src/options/index.html',
-          filename: 'options.html',
-        },
-        {
-          template: './src/popup/index.html',
-          filename: 'popup.html',
-        },
-        {
-          template: './src/tabs/index.html',
-          filename: 'tabs.html',
-        },
-      ),
+      new HtmlWebpackPlugin({
+        template: './src/options/index.html',
+        filename: 'options.html',
+        chunks: ['options'],
+      }),
+      new HtmlWebpackPlugin({
+        template: './src/popup/index.html',
+        filename: 'popup.html',
+        chunks: ['popup'],
+      }),
+      new HtmlWebpackPlugin({
+        template: './src/tabs/index.html',
+        filename: 'tabs.html',
+        chunks: ['tabs'],
+      }),
       new CopyWebpackPlugin({
-        patterns: [
-          { from: './src/public/manifest.json', to: '../dist' },
-          { from: './src/assets', to: '../dist/assets' },
-        ],
+        patterns: [{ from: './src/public/manifest.json', to: '../dist' }],
       }),
       new VueLoaderPlugin(),
       // new BundleAnalyzerPlugin(),
@@ -100,11 +98,19 @@ module.exports = [
       rules: [
         {
           test: /\.js$/,
-          exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
+            },
+          },
+        },
+        {
+          test: /\.(jpe?g|png|gif|svg)$/,
+          use: {
+            loader: 'file-loader',
+            options: {
+              name: 'assets/[name].[ext]',
             },
           },
         },
@@ -114,12 +120,10 @@ module.exports = [
         },
         {
           test: /\.vue$/,
-          exclude: /node_modules/,
           loader: 'vue-loader',
         },
         {
           test: /\.tsx?$/,
-          exclude: /node_modules/,
           use: {
             loader: 'ts-loader',
             options: {

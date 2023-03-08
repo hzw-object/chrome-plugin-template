@@ -10,3 +10,7 @@ declare module '*.scss' {
   const css: string;
   export default css;
 }
+declare module '*.png' {
+  const png: string;
+  export default png;
+}

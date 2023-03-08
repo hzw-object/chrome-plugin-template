@@ -42,22 +42,38 @@
 </template>
 
 <script setup lang="ts">
-  import { ElConfigProvider } from 'element-plus';
+  import { onMounted, ref, reactive } from 'vue';
+  import { ElConfigProvider, ElNotification } from 'element-plus';
   import { ProviderType, GPT3ProviderConfig } from '../../types/config';
-  import { saveProviderConfigs } from '../../utils/config';
+  import { saveProviderConfigs, getProviderConfigs } from '../../utils/config';
   type OptionsType = {
     label: string;
     value: string;
   };
+  onMounted(async () => {
+    const { provider, configs } = await getProviderConfigs();
+    console.log(provider, configs);
+    activeName.value = provider;
+    gptConfig.model = configs[provider].model;
+    gptConfig.apiKey = configs[provider].apiKey;
+  });
   const activeName = ref<ProviderType>(ProviderType.GPT3);
   const gptConfig = reactive<GPT3ProviderConfig>({
-    model: 'text-davinci-003',
+    model: 'gpt-3.5-turbo',
     apiKey: '',
   });
   const options = ref<OptionsType[]>([
     {
       value: 'text-davinci-003',
       label: 'text-davinci-003',
+    },
+    {
+      value: 'gpt-3.5-turbo',
+      label: 'gpt-3.5-turbo',
+    },
+    {
+      value: 'gpt-3.5-turbo-0301',
+      label: 'gpt-3.5-turbo-0301',
     },
   ]);
   const handleClick = (e) => {

@@ -17,7 +17,7 @@
     "noUnusedParameters": true,
     "experimentalDecorators": true,
     "lib": ["dom", "esnext"],
-    "types": ["element-plus/global"],
+    "types": ["element-plus/global","vue/ref-macros"],
     "typeRoots": ["./node_modules/@types/", "./types"],
     "noImplicitAny": false,
     "skipLibCheck": true,
